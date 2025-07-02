@@ -8,6 +8,7 @@ class LinearRegression:
         self.weights = None
         self.bias = bias
         self.N = None
+        self.losses = []
 
     def fit(self, X: np.array, y: np.array) -> bool:
         if self.bias:
@@ -17,7 +18,15 @@ class LinearRegression:
         self.weights = np.zeros(X.shape[1])
         for _ in range(self.n_iters):
             y_hat = np.dot(X, self.weights)
-            break
+            loss = self._MSE(y, y_hat)
+            self.losses.append(loss)
+            error = y - y_hat
+            grad = np.dot(X.T, error) / self.N
+
+            self.weights -= self.learning_rate * grad
+
+        return True
+            
 
 
     def predict(self, X: np.array):
@@ -26,13 +35,10 @@ class LinearRegression:
     def _MSE(self, y: np.array, y_hat: np.array) -> np.float64:
         return np.sum(np.pow(y - y_hat, 2))
 
-    def _MSE_derivative(self, y, y_hat):
-        pass
-
 
 lin = LinearRegression()
 X = np.random.rand(3,2)
-y = np.random.rand(3, 1)
+y = np.random.rand(3)
 
 print(X.shape, X)
 print(y.shape, y)
