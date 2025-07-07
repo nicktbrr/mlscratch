@@ -1,6 +1,5 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 
 class linear(nn.Module):
     def __init__(self, input: int, output: int):
@@ -9,7 +8,7 @@ class linear(nn.Module):
         self.bias = nn.Parameter(torch.randn(output))
     
     def forward(self, input):
-        return F.linear(input, self.weights, self.bias)
+        return torch.matmul(self.weights, input) + self.bias
     
 
 
