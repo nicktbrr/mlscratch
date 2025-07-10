@@ -10,5 +10,7 @@ def he(x: torch.Tensor):
         for s in x.shape[2:]:
             receptive_field *= s
     fan_in *= receptive_field
-    bound = torch.sqrt(6 / fan_in)
-    return x.uniform_(-bound, bound)
+    bound = torch.sqrt(torch.tensor(6.0 / fan_in))
+    with torch.no_grad():
+        x.uniform_(-bound, bound)
+    return x

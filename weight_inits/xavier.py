@@ -13,5 +13,7 @@ def xavier(x: torch.Tensor):
             receptive_field_size *= s
     fan_in = input_maps * receptive_field_size
     fan_out = output_maps * receptive_field_size
-    bound = torch.sqrt(6 / (fan_in + fan_out))
-    x.uniform_(-bound, bound)
+    bound = torch.sqrt(torch.tensor(6.0 / (fan_in + fan_out)))
+    with torch.no_grad():
+        x.uniform_(-bound, bound)
+    return x

@@ -1,4 +1,4 @@
-from .linear import Linear
-from .conv import Conv2D
+from .linear import linear
+from .conv import Conv2d
 
-__all__ = ['Linear', 'Conv2D']
+__all__ = ['linear', 'Conv2d']
