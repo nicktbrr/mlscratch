@@ -1,12 +1,14 @@
 import numpy as np
 from scipy.stats import norm
+import torch
 
 
 def ReLu(x: np.array):
-    return np.maximum(0, x)
+    return torch.maximum(x, torch.tensor(0))
 
 def sigmoid(x: np.array):
-    return 1 / (1 + np.exp(-x))
+    with torch.no_grad():   
+        return 1 / (1 + torch.exp(-x))
 
 def tanH(x: np.array):
     num = np.exp(x) - np.exp(-x)

@@ -18,7 +18,7 @@ class linear(nn.Module):
         self.weights = he(self.weights)
 
     def forward(self, input):
-        return torch.matmul(self.weights, input) + self.bias
+        return torch.matmul(input, self.weights.T) + self.bias
 
 
 if __name__ == "__main__":
