@@ -7,11 +7,11 @@ from typing import Union, Optional
 import sys
 import os
 
-# Add the project root to the Python path
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
 from weight_inits.he import he
-from weight_inits.xavier import xavier
 
 
 class Conv2d(nn.Module):
